@@ -18,7 +18,7 @@ export function FirstQuestion() {
 
     useEffect(() => {
         if (loading) {
-            api.get('/questions/1').then(response => {
+            api.get('/questions/3').then(response => {
                 console.log(response.data);
 
                 setQuestion(response.data.message)
