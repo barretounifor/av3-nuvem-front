@@ -1,30 +1,34 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
-import './FirstQuestion.css'
+import './FifthQuestion.css'
 
-export function FirstQuestion() {
+export function FifthQuestion() {
 
     const navigate = useNavigate();
     const [question, setQuestion] = useState('');
-    const [answers, setAnswers] = useState<string[]>([]);
+    const [answers, setAnswers] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const mainAnswer: string[] = [];
+    const mainAnswer: any[] = JSON.parse(localStorage.getItem('answers') as string);
 
     function handleClickAnswer(answer: string) {
         mainAnswer.push(answer)
         localStorage.setItem('answers', JSON.stringify(mainAnswer))
-        navigate('/2st')
+        
+        navigate('/5st')
     }
 
     useEffect(() => {
         if (loading) {
-            api.get('/questions/1').then(response => {
+            
+            api.post('/hero-matches', {
+                options: mainAnswer
+            }).then(response => {
                 console.log(response.data);
 
-                setQuestion(response.data.message)
-                setAnswers(response.data.answers)
-            })
+                setAnswers(response.data)
+                
+            }).catch
             setLoading(false)
         }
     }, [])
@@ -32,14 +36,14 @@ export function FirstQuestion() {
     return (
         <div className='first-question-container'>
             <div className='first-question-container-title'>
-                <h1>Primeira pergunta:</h1>
+                <h1>Quinta pergunta:</h1>
                 <p>{question}</p>
             </div>
             <div className='first-question-container-answers'>
                 {answers.map(answer => {
                     return (
-                        <div onClick={() => handleClickAnswer(answer)}>
-                            <p>{answer}</p>
+                        <div onClick={() => handleClickAnswer(answer.caracteristicas[4])}>
+                            <p>{answer.caracteristicas[4]}</p>
                         </div>
                     )
                 })}

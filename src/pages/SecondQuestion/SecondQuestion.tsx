@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
-import './FirstQuestion.css'
+import './SecondQuestion.css'
 
-export function FirstQuestion() {
+export function SecondQuestion() {
 
     const navigate = useNavigate();
     const [question, setQuestion] = useState('');
     const [answers, setAnswers] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
-    const mainAnswer: string[] = [];
+    const mainAnswer: string[] = JSON.parse(localStorage.getItem('answers') as string);
 
     function handleClickAnswer(answer: string) {
         mainAnswer.push(answer)
-        navigate('/2st')
+        localStorage.setItem('answers', JSON.stringify(mainAnswer))
+        navigate('/3st')
     }
 
     useEffect(() => {
@@ -31,7 +32,7 @@ export function FirstQuestion() {
     return (
         <div className='first-question-container'>
             <div className='first-question-container-title'>
-                <h1>Primeira pergunta:</h1>
+                <h1>Segunda pergunta:</h1>
                 <p>{question}</p>
             </div>
             <div className='first-question-container-answers'>

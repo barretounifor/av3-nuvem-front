@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
-import './FirstQuestion.css'
+import './FourthQuestion.css'
 
-export function FirstQuestion() {
+export function FourthQuestion() {
 
     const navigate = useNavigate();
     const [question, setQuestion] = useState('');
     const [answers, setAnswers] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
-    const mainAnswer: string[] = [];
-
+    const mainAnswer: string[] = JSON.parse(localStorage.getItem('answers') as string);
     function handleClickAnswer(answer: string) {
         mainAnswer.push(answer)
         localStorage.setItem('answers', JSON.stringify(mainAnswer))
-        navigate('/2st')
+        console.log(localStorage);
+        navigate('/5ft')
     }
 
     useEffect(() => {
         if (loading) {
-            api.get('/questions/1').then(response => {
+            api.get('/questions/4').then(response => {
                 console.log(response.data);
 
                 setQuestion(response.data.message)
@@ -32,7 +32,7 @@ export function FirstQuestion() {
     return (
         <div className='first-question-container'>
             <div className='first-question-container-title'>
-                <h1>Primeira pergunta:</h1>
+                <h1>Quarta pergunta:</h1>
                 <p>{question}</p>
             </div>
             <div className='first-question-container-answers'>
