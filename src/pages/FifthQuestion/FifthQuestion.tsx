@@ -11,24 +11,21 @@ export function FifthQuestion() {
     const [loading, setLoading] = useState(true);
     const mainAnswer: any[] = JSON.parse(localStorage.getItem('answers') as string);
 
-    function handleClickAnswer(answer: string) {
-        mainAnswer.push(answer)
-        localStorage.setItem('answers', JSON.stringify(mainAnswer))
-        
-        navigate('/5st')
+    function handleClickAnswer(answer: any) {
+        localStorage.setItem("hero", JSON.stringify(answer))
+        navigate('/result')
     }
 
     useEffect(() => {
         if (loading) {
-            
             api.post('/hero-matches', {
                 options: mainAnswer
             }).then(response => {
-                console.log(response.data);
+                console.log(response);
 
                 setAnswers(response.data)
-                
-            }).catch
+
+            }).catch(err => console.log(err))
             setLoading(false)
         }
     }, [])
@@ -42,7 +39,7 @@ export function FifthQuestion() {
             <div className='first-question-container-answers'>
                 {answers.map(answer => {
                     return (
-                        <div onClick={() => handleClickAnswer(answer.caracteristicas[4])}>
+                        <div onClick={() => handleClickAnswer(answer)}>
                             <p>{answer.caracteristicas[4]}</p>
                         </div>
                     )

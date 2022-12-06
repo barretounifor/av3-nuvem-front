@@ -4,7 +4,9 @@ import { FifthQuestion } from '../pages/FifthQuestion/FifthQuestion'
 import { FirstQuestion } from '../pages/FirstQuestion/FirstQuestion'
 import { FourthQuestion } from '../pages/FourthQuestion/FourthQuestion'
 import { HomePage } from '../pages/HomePage/HomePage'
+import Result from '../pages/Result/Result'
 import { SecondQuestion } from '../pages/SecondQuestion/SecondQuestion'
+import { ThirdQuestion } from '../pages/ThirdQuestion/ThirdQuestion'
 function Container() {
 
     const startPage = {
@@ -19,6 +21,10 @@ function Container() {
         path: '/2st',
         element: <SecondQuestion />,
     }
+    const thirdQuestion = {
+        path: '/3st',
+        element: <ThirdQuestion />,
+    }
     const fourthQuestion = {
         path: '/4st',
         element: <FourthQuestion />,
@@ -28,13 +34,19 @@ function Container() {
         path: '/5ft',
         element: <FifthQuestion />,
     }
+    const result = {
+        path: '/result',
+        element: <Result />,
+    }
 
     const routes = useRoutes([
         startPage,
         firstQuestion,
         secondQuestion,
+        thirdQuestion,
         fourthQuestion,
-        fifthQuestion
+        fifthQuestion,
+        result
     ])
 
     return (

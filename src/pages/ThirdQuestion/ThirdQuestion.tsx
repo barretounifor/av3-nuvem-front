@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
-import './SecondQuestion.css'
+import './ThirdQuestion.css'
 
-export function SecondQuestion() {
+export function ThirdQuestion() {
 
     const navigate = useNavigate();
     const [question, setQuestion] = useState('');
@@ -14,13 +14,12 @@ export function SecondQuestion() {
     function handleClickAnswer(answer: string) {
         mainAnswer.push(answer)
         localStorage.setItem('answers', JSON.stringify(mainAnswer))
-        navigate('/3st')
+        navigate('/4st')
     }
 
     useEffect(() => {
         if (loading) {
-            api.get('/questions/2').then(response => {
-                console.log(response.data);
+            api.get('/questions/3').then(response => {
 
                 setQuestion(response.data.message)
                 setAnswers(response.data.answers)

@@ -7,7 +7,10 @@ export function HomePage() {
 
     return (
         <div className='home-page-container'>
-            <button onClick={() => navigate('/1st')} className='StartButton'>Começar!</button>
+            <button onClick={() => {
+                localStorage.clear()
+                navigate('/1st')
+            }} className='StartButton'>Começar!</button>
         </div>
     )
 
