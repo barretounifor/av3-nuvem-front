@@ -23,8 +23,8 @@ export function FifthQuestion() {
             }).then(response => {
                 console.log(response);
 
-                setAnswers(response.data)
-
+                setAnswers(response.data.answers)
+                setQuestion(response.data.message)
             }).catch(err => console.log(err))
             setLoading(false)
         }
